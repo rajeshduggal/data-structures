@@ -32,6 +32,22 @@ public class LL<T> {
         size++;
     }
 
+    public void insertUsingRecursion(T val, int index) {
+        head = insertUsingRecursion(val, index, head);
+    }
+
+    private Node insertUsingRecursion(T val, int index, Node node) {
+        // We're at the right place in the list, so we insert here.
+        if (index == 0) {
+            Node temp = new Node(val, node);
+            size++;
+            return temp;
+        }
+        // We keep moving foward in the list one node at a time.
+        node.next = insertUsingRecursion(val, index-1, node.next);
+        return node;
+    }
+
     class Node<T> {
         private T value;
         private Node<T> next;
