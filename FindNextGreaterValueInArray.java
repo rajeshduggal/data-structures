@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.stream.*;
 /**
  * Return an int[] of the same size, and for each element first
  * element to the right that is greater, or cycle back around
@@ -18,18 +20,17 @@ public class FindNextGreaterValueInArray {
     }
 
     public int[] execute(int[] input) {
-        int[] output = new int[input.length];
-
-        for(int i = 0; i < input.length; i++) {
-            output[i] = getFirstGreaterValue(i, input);
-        }
-        return output;
+        return IntStream.range(0,input.length)
+            .map(idx->getFirstGreaterValue(idx,input))
+            .toArray();
     }
 
     private int getFirstGreaterValue(int pos, int[] arr) {
-        for (int incr = 1; incr < (arr.length - 1); incr++) {
-            int potentialMatch = arr[incr % arr.length];
-            if (arr[pos] < potentialMatch) return potentialMatch;
+        for (int incr = 1; incr < arr.length; incr++) {
+            int potentialMatch = arr[(pos + incr) % arr.length];
+            if (potentialMatch > arr[pos]) {
+                return potentialMatch;
+            }
         }
         return -1;
     }

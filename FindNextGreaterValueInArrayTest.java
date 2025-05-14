@@ -18,6 +18,7 @@ public class FindNextGreaterValueInArrayTest {
     public void testExecuter() {
         var executer = new FindNextGreaterValueInArray();
         assertArrayEquals(new int[]{1,2,-1,2}, executer.execute(new int[]{ 0,1,2,1 }));
+        assertArrayEquals(new int[]{-1,3,3,3}, executer.execute(new int[]{ 3,2,1,0 }));
     }
 
     public static void main(String... args) throws Exception {
